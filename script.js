@@ -72,55 +72,61 @@ function displayProducts() {
 }
 
 // Add to Cart Function
+// Add to Cart Function
+// Add to Cart Function
 function addToCart(productId) {
   const product = collection.cart.find((item) => item.id === productId);
 
   if (product) {
-    const cartItem = cart.find((item) => item.id === productId);
+    // Calculate the total number of items in the cart
+    let totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
-    if (cartItem) {
-      // Check if quantity is already 100
-      if (cartItem.quantity >= 100) {
-        alert("You cannot add more than 100 units of this item.");
-        return;
-      }
-      // Increment quantity if product already in cart
-      cartItem.quantity += 1;
-    } else {
-      // Add new product to cart
-      cart.push({ ...product });
+    // Check if the total number of items exceeds 100
+    if (totalItems >= 100) {
+      alert("You cannot have more than 100 items in your cart.");
+      return; // Prevent adding more items if total is 100 or more
     }
 
+    // If the item is already in the cart, just increment the quantity
+    const cartItem = cart.find((item) => item.id === productId);
+    if (cartItem) {
+      cartItem.quantity += 1;
+    } else {
+      // Otherwise, add the new product to the cart
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    // Update the cart UI and total price
     updateCartAmount();
     updateCartUI();
     saveCartToLocalStorage();
   }
 }
 
-// Update Cart Amount (cart icon)
-function updateCartAmount() {
-  const cartAmountElement = document.getElementById("cart-amount");
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-  cartAmountElement.textContent = totalItems; // Update the cart icon with the total number of items
-}
-
-// Increase Quantity
+// Increase Quantity Function
 function increaseQuantity(productId) {
   const cartItem = cart.find((item) => item.id === productId);
   if (cartItem) {
-   
-      // Check if quantity is already 100
-      if (cartItem.quantity >= 100) {
-        alert("You cannot add more than 100 units of this item.");
-        return;
-      }
+    // Calculate the total number of items in the cart
+    let totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+    // Check if increasing quantity will exceed 100 items in total
+    if (totalItems >= 100) {
+      alert("You cannot have more than 100 items in your cart.");
+      return; // Prevent increasing quantity if total is 100 or more
+    }
+
+    // Increase the quantity if the check passes
     cartItem.quantity += 1;
+
+    // Update the cart UI and total price
+    updateCartAmount();
     updateCartUI();
     saveCartToLocalStorage();
   }
 }
 
-// Decrease Quantity
+// Decrease Quantity Function (as before)
 function decreaseQuantity(productId) {
   const cartItem = cart.find((item) => item.id === productId);
   if (cartItem) {
@@ -133,6 +139,16 @@ function decreaseQuantity(productId) {
     updateCartUI();
     saveCartToLocalStorage();
   }
+}
+
+function updateCartAmount() {
+  const cartAmountElement = document.getElementById("cart-amount");
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+   // Show alert if total items exceed 100
+   if (totalItems > 100) {
+    alert("You cannot have more than 100 items in your cart.");
+  }
+  cartAmountElement.textContent = totalItems; // Update the cart icon with the total number of items
 }
 
 // Save Cart to LocalStorage

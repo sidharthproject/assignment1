@@ -40,7 +40,7 @@ body {
 .cart-icon img{
     height: 70px;
     width: 70px;
-    margin-right: 20px;
+    margin-right: 50px;
 }
 .product-list{
     display: flex;
@@ -227,12 +227,7 @@ body {
     width: 70px;
 }
 
-#bar-img img {
-    height: 30px;
-    width: 30px;
-    cursor: pointer;
-    display: none; /* Hidden by default */
-}
+
 
 /* Product Section */
 .products h2 {
@@ -249,7 +244,7 @@ body {
     align-items: center;
 position: absolute;
 top: 6px;
-right: 20px;
+right: 55px;
 
 background-color: #ddd;
 border-radius: 100%;
@@ -266,7 +261,7 @@ text-align: center;
     
 
     .cart-panel {
-        right: -500px; /* Initially hidden */
+        right: -800px; /* Initially hidden */
         width: 100%;
     }
 
@@ -297,7 +292,14 @@ text-align: center;
    .header{
     padding: 10px;
    }
-
+   .cart-icon img{
+    height: 70px;
+    width: 70px;
+    margin-right:20px;
+}
+ .amount{
+   right: 20px;
+ }
 
     
 }
