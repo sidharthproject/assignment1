@@ -45,7 +45,12 @@ const collection = {
     ]
   };
   // Initialize cart from localStorage or use an empty array
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  try {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+  } catch (error) {
+    console.error("Failed to parse cart from localStorage:", error);
+    cart = []; // Reset cart if parsing fails
+  }
 
 const cartPanel = document.getElementById("cart-panel");
 const cartItemsContainer = document.getElementById("cart-items");
@@ -159,7 +164,22 @@ function loadCartFromLocalStorage() {
   updateCartAmount(); // Update the cart amount on page load
   updateCartUI(); // Update the cart UI on page load
 }
+function clearCartItem(productId) {
+  // Find the item in the cart
+  const cartItemIndex = cart.findIndex((item) => item.id === productId);
 
+  if (cartItemIndex !== -1) {
+      // Remove the item from the cart
+      cart.splice(cartItemIndex, 1);
+
+      // Update the cart amount and UI
+      updateCartAmount();
+      updateCartUI();
+
+      // Save the updated cart to localStorage
+      saveCartToLocalStorage();
+  }
+}
 // Update Cart UI
 function updateCartUI() {
   cartItemsContainer.innerHTML = ""; // Clear previous cart items
@@ -172,20 +192,25 @@ function updateCartUI() {
     const cartItem = document.createElement("div");
     cartItem.className = "cart-item";
     cartItem.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-      <div class="cart-item-details">
-        <p>${item.name}</p>
-        <p>Price: ₹${item.price.toFixed(2)}</p>
-        <div class="inc-quantity">
-          <button onclick="decreaseQuantity('${item.id}')">-</button>
-          <p>Qty: ${item.quantity}</p>
-          <button onclick="increaseQuantity('${item.id}')">+</button>
-        </div>
-      </div>
-    `;
+  <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+  <div class="cart-item-details">
+    <p>${item.name}</p>
+    <p>Price: ₹${item.price.toFixed(2)}</p>
+    <div class="inc-quantity">
+    
+      <button onclick="decreaseQuantity('${item.id}')">-</button>
+      <p>Qty: ${item.quantity}</p>
+      <button onclick="increaseQuantity('${item.id}')">+</button>
+    </div>
+    <button onclick="clearCartItem('${item.id}')">Clear</button> <!-- Clear Button -->
+  </div>
+`;
+
 
     cartItemsContainer.appendChild(cartItem);
   });
+  
+
 
   // Update total price
   totalPriceElement.innerText = `Total: ₹${totalPrice.toFixed(2)}`;
@@ -210,3 +235,4 @@ window.onload = function () {
   displayProducts();
   loadCartFromLocalStorage(); // Load the cart from localStorage
 };
+
