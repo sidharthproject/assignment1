@@ -78,14 +78,16 @@ body {
     transition: transform 0.3s ease-in-out; /* Smooth zoom-in effect */
   }
   
-  .product-item:active{
+  .product-item{
    
     transition: all 0.2s;
     padding:  40px 10px;
     
     border-radius: 15px;
-    border: 2px solid rgba(230, 224, 224, 0.26);
-    transform: scale(1);
+    border: 2px solid rgba(230, 224, 224, 0.815);
+   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25); /* Box shadow */
+    cursor: pointer;
+
   
   }
   .product-item h3{
@@ -105,6 +107,10 @@ body {
     font-weight: 700;
     color: black;
     background-color: rgb(133, 241, 133);
+    border-radius: 10px;
+  }
+  .product-item button:active{
+    background-color: rgb(48, 233, 48);
   }
   
  

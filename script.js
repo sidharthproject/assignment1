@@ -143,7 +143,8 @@ function updateCartAmount() {
    if (totalItems > 100) {
     alert("You cannot have more than 100 items in your cart.");
   }
-  cartAmountElement.textContent = totalItems; // Update the cart icon with the total number of items
+  cartAmountElement.textContent = totalItems; 
+  // Update the cart icon with the total number of items
 }
 
 // Save Cart to LocalStorage
