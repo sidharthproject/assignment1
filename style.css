@@ -31,11 +31,7 @@ body {
     color: rgb(252, 244, 232);
    
 }
-.nav-item  p:active{
-    color:  rgb(105, 96, 83);
-    transform: scale(150%);
-   
-}
+
 
 .cart-icon img{
     height: 70px;
@@ -174,24 +170,29 @@ body {
     gap: 30px;
     align-items: center;
   }
+  .cart-item-details > *{
+    width: 100px;
+
+  }
   .cart-item img{
     height: 50px;
     width: 50px;
   }
   .inc-quantity{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     gap: 10px;
     align-items: center;
+   
+   
     
   }
   .inc-quantity button{
      padding: 7px;
+     border: 2px solid red;
   }
 
-  #bar-img img{
-    display: none;
-  }
+ 
 
 /* Basic Styling */
 
@@ -300,6 +301,10 @@ text-align: center;
  .amount{
    right: 20px;
  }
+ .cart-item-details > *{
+  width: 30px;
+
+}
 
     
 }
