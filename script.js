@@ -70,38 +70,33 @@ function displayProducts() {
     productList.appendChild(productItem);
   });
 }
-
-// Add to Cart Function
-// Add to Cart Function
-// Add to Cart Function
 function addToCart(productId) {
+  console.log("Adding product to cart:", productId); // Debug log
   const product = collection.cart.find((item) => item.id === productId);
 
   if (product) {
-    // Calculate the total number of items in the cart
     let totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
-    // Check if the total number of items exceeds 100
     if (totalItems >= 100) {
       alert("You cannot have more than 100 items in your cart.");
-      return; // Prevent adding more items if total is 100 or more
+      return;
     }
 
-    // If the item is already in the cart, just increment the quantity
     const cartItem = cart.find((item) => item.id === productId);
     if (cartItem) {
       cartItem.quantity += 1;
     } else {
-      // Otherwise, add the new product to the cart
       cart.push({ ...product, quantity: 1 });
     }
 
-    // Update the cart UI and total price
     updateCartAmount();
     updateCartUI();
     saveCartToLocalStorage();
+  } else {
+    console.error("Product not found:", productId); // Error handling
   }
 }
+
 
 // Increase Quantity Function
 function increaseQuantity(productId) {
