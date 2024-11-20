@@ -78,19 +78,20 @@ body {
     transition: transform 0.3s ease-in-out; /* Smooth zoom-in effect */
   }
   
-  .product-item:hover img {
-    background-color: rgb(243, 242, 240);
-    transition: all 0.7s;
+  .product-item:active{
+   
+    transition: all 0.2s;
     padding:  40px 10px;
     
     border-radius: 15px;
     border: 2px solid rgba(230, 224, 224, 0.26);
-    transform: scale(1.05); /* Slight zoom effect */
+    transform: scale(1);
+  
   }
   .product-item h3{
     color: rgb(82, 80, 80);
     margin: 10px;
-  }
+  } 
   .product-item p{
     color: rgb(202, 176, 176);
     margin: 10px;
